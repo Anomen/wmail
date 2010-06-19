@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/wmail.wt.dir/hello.cxx.o  -o wmail.wt -rdynamic -lwthttp -lwtext -lwt 
