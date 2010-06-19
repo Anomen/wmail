@@ -20,7 +20,8 @@ int main (void)
     store->connect();
 
     // Open the INBOX
-    vmime::ref <vmime::net::folder> folder = store->getDefaultFolder();
+    vmime::utility::path  p ("Potes");
+    vmime::ref <vmime::net::folder> folder = store->getFolder(p);
     folder->open(vmime::net::folder::MODE_READ_WRITE);
 
     vmime::utility::outputStreamAdapter out(std::cout);
