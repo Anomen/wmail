@@ -17,21 +17,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <Wt/WServer>
-#include <WApplication>
-#include "CApplication.h"
+#ifndef __CAPPLICATION_H__
+#define __CAPPLICATION_H__
 
-using namespace Wt;
-using namespace nsWMail;
+#include <Wt/WApplication>
 
-WApplication *createApplication(const WEnvironment& env)
-{
-    return new CApplication(env);
+namespace Wt {
+    class WEnvironment;
+    class WContainerWidget;
+    class WBorderLayout;
 }
 
-int main(int argc, char **argv)
-{
-    return WRun(argc, argv, &createApplication);
+namespace nsWMail {
+    class CMenu;
+
+    class CApplication : public Wt::WApplication
+    {
+      public:
+        CApplication(const Wt::WEnvironment& env);
+        ~CApplication();
+        
+        void showPage(Wt::WContainerWidget& widgetCont);
+      
+      private:
+        Wt::WContainerWidget * _mainContainer;
+        Wt::WBorderLayout    * _mainLayout;
+        nsWMail::CMenu       * _menu;
+      
+    };
 }
 
-
+#endif

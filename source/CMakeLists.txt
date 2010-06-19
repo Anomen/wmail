@@ -1,7 +1,8 @@
 SET(WT_PROJECT_SOURCE
 wmail.cxx
-wmailapplication.cxx
-mainpage.cxx
+CApplication.cxx
+CMainpage.cxx
+CMenu.cxx
 )
 SET(WT_PROJECT_TARGET wmail.wt)
 ADD_EXECUTABLE(${WT_PROJECT_TARGET} ${WT_PROJECT_SOURCE})

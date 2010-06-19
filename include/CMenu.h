@@ -17,21 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <Wt/WServer>
-#include <WApplication>
-#include "CApplication.h"
+#ifndef __CMENU_H__
+#define __CMENU_H__
 
-using namespace Wt;
-using namespace nsWMail;
+#include <Wt/WTreeTable>
 
-WApplication *createApplication(const WEnvironment& env)
+namespace nsWMail
 {
-    return new CApplication(env);
+    class CMenu : public Wt::WTreeTable
+    {
+      public:
+        CMenu();
+        ~CMenu();
+    };
 }
 
-int main(int argc, char **argv)
-{
-    return WRun(argc, argv, &createApplication);
-}
-
-
+#endif

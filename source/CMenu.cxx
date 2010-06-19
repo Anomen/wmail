@@ -17,21 +17,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <Wt/WServer>
-#include <WApplication>
-#include "CApplication.h"
+#include "CMenu.h"
+
+#include <Wt/WTreeTableNode>
 
 using namespace Wt;
 using namespace nsWMail;
 
-WApplication *createApplication(const WEnvironment& env)
+CMenu::CMenu() 
+    : WTreeTable()
 {
-    return new CApplication(env);
+    resize(350, 300);
+    
+    // Create and set the root node
+    WTreeTableNode *root = new WTreeTableNode("All Personnel");
+    root->setImagePack("resources/");
+    setTreeRoot(root, "Emweb Organigram");
+    
+    // Populate the tree with data nodes.
+    WTreeTableNode *node1 = new WTreeTableNode("Upper Management", 0, root);
+    WTreeTableNode *node2;
+    node2 = new WTreeTableNode("Chief Anything Officer", 0, node1);
+    node2 = new WTreeTableNode("Vice President of Parties", 0, node1);
+    root->expand();
 }
 
-int main(int argc, char **argv)
-{
-    return WRun(argc, argv, &createApplication);
-}
-
-
+CMenu::~CMenu() { }
