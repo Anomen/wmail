@@ -16,6 +16,8 @@
 #include <Wt/WFileUpload>
 #include <Wt/WBorderLayout>
 #include <Wt/WContainerWidget>
+#include <Wt/WStringListModel>
+#include <Wt/WTreeView>
 
 using namespace Wt;
 using namespace std;
@@ -24,10 +26,10 @@ using namespace std;
  * A simple hello world application class which demonstrates how to react
  * to events, read input, and give feed-back.
  */
-class HelloApplication : public WApplication
+class WMailApplication : public WApplication
 {
 public:
-  HelloApplication(const WEnvironment& env);
+  WMailApplication(const WEnvironment& env);
 
 private:
   WLineEdit *nameEdit_;
@@ -42,23 +44,37 @@ private:
  * constructor so it is typically also an argument for your custom
  * application constructor.
 */
-HelloApplication::HelloApplication(const WEnvironment& env)
+WMailApplication::WMailApplication(const WEnvironment& env)
   : WApplication(env)
 {
     WContainerWidget *w = new WContainerWidget();
     WBorderLayout *layout = new WBorderLayout();
+    WTreeView *treeEmail = new WTreeView();
+    WStringListModel *emailModel = new WStringListModel();
+    emailModel->addString("Status");
+    emailModel->addString("Description");
+    emailModel->addString("Date");
+    emailModel->addString("Date");
+
+    
+  //  for(int i = 0; i < 10; i++) {
+  //      emailModel->insertRows(i, i 
+  //  }
+    treeEmail->setModel(emailModel);
+
     layout->addWidget(new WText("West-side is best"), WBorderLayout::West);
     layout->addWidget(new WText("East-side is best"), WBorderLayout::East);
+    layout->addWidget(treeEmail, WBorderLayout::Center);
     //layout->addWidget(contents, Center);
    
     // use layout but do not justify vertically
     w->setLayout(layout, AlignTop | AlignJustify);
-    //b->clicked().connect(this, &HelloApplication::greet);
+    //b->clicked().connect(this, &WMailApplication::greet);
     //
     root()->addWidget(w);
 }
 
-void HelloApplication::greet()
+void WMailApplication::greet()
 {
   /*
    * Update the text, using text input into the nameEdit_ field.
@@ -73,7 +89,7 @@ WApplication *createApplication(const WEnvironment& env)
    * You could read information from the environment to decide whether
    * the user has permission to start a new application
    */
-  return new HelloApplication(env);
+  return new WMailApplication(env);
 }
 
 int main(int argc, char **argv)
