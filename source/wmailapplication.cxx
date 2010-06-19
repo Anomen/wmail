@@ -1,4 +1,5 @@
 #include "wmailapplication.h"
+#include "mainpage.h"
 
 /*
  * The env argument contains information about the new session, and
@@ -9,38 +10,23 @@
 WMailApplication::WMailApplication(const WEnvironment& env)
   : WApplication(env)
 {
-    WContainerWidget *w = new WContainerWidget();
-    WBorderLayout *layout = new WBorderLayout();
-    WTreeView *treeEmail = new WTreeView();
-    WStringListModel *emailModel = new WStringListModel();
-    emailModel->addString("Status");
-    emailModel->addString("Description");
-    emailModel->addString("Date");
-    emailModel->addString("Date");
+    _mainContainer = new WContainerWidget();
+    _mainLayout = new WBorderLayout();
 
-    
-  //  for(int i = 0; i < 10; i++) {
-  //      emailModel->insertRows(i, i 
-  //  }
-    treeEmail->setModel(emailModel);
-
-    layout->addWidget(new WText("West-side is best"), WBorderLayout::West);
-    layout->addWidget(new WText("East-side is best"), WBorderLayout::East);
-    layout->addWidget(treeEmail, WBorderLayout::Center);
+    MainPage * mainpage = new MainPage();
+    _mainLayout->addWidget(new WText("West-side is best"), WBorderLayout::West);
+    _mainLayout->addWidget(new WText("East-side is best"), WBorderLayout::East);
+    _mainLayout->addWidget(mainpage, WBorderLayout::Center);
     //layout->addWidget(contents, Center);
    
     // use layout but do not justify vertically
-    w->setLayout(layout, AlignTop | AlignJustify);
+    _mainContainer->setLayout(_mainLayout, AlignTop | AlignJustify);
     //b->clicked().connect(this, &WMailApplication::greet);
     //
-    root()->addWidget(w);
+    root()->addWidget(_mainContainer);
 }
 
-void WMailApplication::greet()
+void WMailApplication::showPage(WContainerWidget& widgetCont)
 {
-  /*
-   * Update the text, using text input into the nameEdit_ field.
-   */
-  greeting_->setText("Hello there, " + nameEdit_->text());
-
+	_mainLayout->addWidget(&widgetCont, WBorderLayout::Center);
 }

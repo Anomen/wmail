@@ -26,12 +26,14 @@ class WMailApplication : public WApplication
 {
 public:
   WMailApplication(const WEnvironment& env);
+  
+  void showPage(WContainerWidget& widgetCont);
+
 
 private:
-  WLineEdit *nameEdit_;
-  WText *greeting_;
+  WContainerWidget *_mainContainer;
+  WBorderLayout * _mainLayout;
 
-  void greet();
 };
 
 #endif
